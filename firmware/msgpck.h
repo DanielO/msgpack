@@ -17,8 +17,6 @@
 #ifndef heads_msgpck_h
 #define heads_msgpck_h
 
-#include "Arduino.h"
-
 // ************************** Look up *****************************/
 
 /**
