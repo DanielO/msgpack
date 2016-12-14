@@ -176,13 +176,13 @@ bool msgpck_read_bool(Stream * s, bool *b);
  * Description: Read the first data of Stream s's buffer if it is an integer.
  * 
  * Parameter: Stream * s : input stream.
- *  byte * b: pointer to the read value.
+ *  char * b: pointer to the read value.
  *  uint8_t max_size: max size in byte of the expected value.
  * 
  * return: true if next data has been read correctly, false if not
  * 
 */
-bool msgpck_read_integer(Stream * s, byte *b, uint8_t max_size);
+bool msgpck_read_integer(Stream * s, char *b, uint8_t max_size);
 
 /**
  * Function: msgpck_read_float
@@ -228,14 +228,14 @@ bool msgpck_read_string(Stream * s, char * str, uint32_t max_size);
  * Description: Read the first data of Stream s's buffer if it is a bin.
  * 
  * Parameter: Stream * s : input stream.
- *  byte * bin: pointer to the read value.
+ *  char * bin: pointer to the read value.
  *  uint32_t max_size: max size in byte of the expected value.
  *  uint32_t *str_size: pointer to the actual size of the read bin
  * 
  * return: true if next data has been read correctly, false if not
  * 
 */
-bool msgpck_read_bin(Stream * s, byte * bin, uint32_t max_size, uint32_t *bin_size);
+bool msgpck_read_bin(Stream * s, char * bin, uint32_t max_size, uint32_t *bin_size);
 
 /**
  * Function: msgpck_read_bin

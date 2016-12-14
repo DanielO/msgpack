@@ -234,19 +234,19 @@ bool msgpck_map_next(Stream * s) {
 }
 
 bool msgpck_read_nil(Stream * s) {
-  uint8_t rfb;
+  chat rfb;
   return ((s->readBytes(&rfb,1) == 1) && (rfb == 0xc0));
 }
 
 bool msgpck_read_bool(Stream * s, bool *b) {
-  uint8_t rfb;
-  uint8_t dmp = s->readBytes(&rfb,1);
+  char rfb;
+  char dmp = s->readBytes(&rfb,1);
   *b = (rfb == 0xc3);
   return ((dmp == 1) && ((rfb == 0xc3) || (rfb == 0xc2)));
 }
 
-bool msgpck_read_integer(Stream * s, byte *b, uint8_t max_size) {
-  byte fb;
+bool msgpck_read_integer(Stream * s, char *b, uint8_t max_size) {
+  char fb;
   uint8_t read_size;
   bool neg = false;
   if (s->readBytes(&fb,1) != 1)
@@ -308,7 +308,7 @@ bool msgpck_read_integer(Stream * s, byte *b, uint8_t max_size) {
 }
 
 bool msgpack_read_float(Stream * s, float *f) {
-  byte fb;
+  char fb;
   uint8_t read_size;
   bool b = true;
   if (s->readBytes(&fb,1) != 1)
@@ -317,7 +317,7 @@ bool msgpack_read_float(Stream * s, float *f) {
     read_size = 4;
     union float_to_byte {
       float f;
-      byte b[4];
+      char b[4];
     } b2f;
     b = s->readBytes(&(b2f.b[3]),1) == 1;
     b = s->readBytes(&(b2f.b[2]),1) == 1;
@@ -327,7 +327,7 @@ bool msgpack_read_float(Stream * s, float *f) {
     return b;
   } else if (fb == 0xcb) {
     uint64_t dmp;
-    uint8_t * p = (uint8_t *) &dmp;
+    char * p = (char *) &dmp;
     read_size = 8;
     s->readBytes(p,read_size);
   } else {
@@ -338,10 +338,10 @@ bool msgpack_read_float(Stream * s, float *f) {
 
 bool msgpck_read_string(Stream * s, char * str, uint32_t max_size, uint32_t *str_size) {
   *str_size = 0;
-  uint8_t fb;
+  char fb;
   bool b = true;
   uint32_t read_size = 0;
-  uint8_t * p = (uint8_t *) &read_size;
+  char * p = (char *) &read_size;
   if(s->readBytes(&fb,1) == 1) {
     if((fb >> 5) == 5) {
       read_size = fb & 0x1f;
@@ -377,11 +377,11 @@ bool msgpck_read_string(Stream * s, char * str, uint32_t max_size) {
 }
 
 
-bool msgpck_read_bin(Stream * s, byte * bin, uint32_t max_size, uint32_t *bin_size) {
-  uint8_t fb;
+bool msgpck_read_bin(Stream * s, char * bin, uint32_t max_size, uint32_t *bin_size) {
+  char fb;
   bool b = true;
   uint32_t read_size = 0;
-  uint8_t * p = (uint8_t *) &read_size;
+  char * p = (char *) &read_size;
   if(s->readBytes(&fb,1) == 1) {
     if(fb == 0xc4) {
       b &= s->readBytes(&p[0],1) == 1;
@@ -411,9 +411,9 @@ bool msgpck_read_bin(Stream * s, byte * bin, uint32_t max_size) {
 }
 
 bool msgpck_read_array_size(Stream * s, uint32_t * array_size) {
-  uint8_t fb;
+  char fb;
   bool b = true;
-  uint8_t * p = (uint8_t *) array_size;
+  char * p = (char *) array_size;
   if(s->readBytes(&fb,1) == 1) {
     if((fb >> 4) == 0x09) {
       *array_size = fb & 0x0f;
@@ -437,9 +437,9 @@ bool msgpck_read_array_size(Stream * s, uint32_t * array_size) {
 }
 
 bool msgpck_read_map_size(Stream * s, uint32_t * map_size) {
-  uint8_t fb;
+  char fb;
   bool b = true;
-  uint8_t * p = (uint8_t *) map_size;
+  char * p = (char *) map_size;
   if(s->readBytes(&fb,1) == 1) {
     if((fb >> 4) == 0x08) {
       *map_size = fb & 0x0f;
