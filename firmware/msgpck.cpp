@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+#include <stdint.h>
 #include "msgpck.h"
 
 #define msgpck_empty 0xff
