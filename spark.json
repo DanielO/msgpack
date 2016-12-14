@@ -1,0 +1,7 @@
+{
+    "name": "msgpck",
+    "version": "0.0.1",
+    "author": "Daniel O'Connor <darius@dons.net.au>
+    "license": "LGPL3",
+    "description": "Port of arduino_msgpack to Particle"
+}
