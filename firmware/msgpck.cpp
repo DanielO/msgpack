@@ -234,7 +234,7 @@ bool msgpck_map_next(Stream * s) {
 }
 
 bool msgpck_read_nil(Stream * s) {
-  chat rfb;
+  char rfb;
   return ((s->readBytes(&rfb,1) == 1) && (rfb == 0xc0));
 }
 
@@ -405,7 +405,7 @@ bool msgpck_read_bin(Stream * s, char * bin, uint32_t max_size, uint32_t *bin_si
   return false;
 }
 
-bool msgpck_read_bin(Stream * s, byte * bin, uint32_t max_size) {
+bool msgpck_read_bin(Stream * s, char * bin, uint32_t max_size) {
   uint32_t read_size;
   return msgpck_read_bin(s, bin, max_size, &read_size);
 }
@@ -725,12 +725,12 @@ void msgpck_to_json(Stream * output, Stream * input) {
   } else if(msgpck_integer_next(input)) {
     if(msgpck_signed_next(input)) {
       int32_t i = 0;
-      uint8_t * p = (uint8_t *) &i;
+      char * p = (char *) &i;
       msgpck_read_integer(input, p, 4);
       output->print(i);
     } else {
       uint32_t u = 0;
-      uint8_t * p = (uint8_t *) &u;
+      char * p = (char *) &u;
       msgpck_read_integer(input, p, 4);
       output->print(u);
     }
@@ -748,7 +748,7 @@ void msgpck_to_json(Stream * output, Stream * input) {
   } else if(msgpck_bin_next(input)) {
     flush_buf( buf, buf_size);
     uint32_t r_size;
-    msgpck_read_bin(input,(unsigned char *)  buf, buf_size, &r_size);
+    msgpck_read_bin(input,(char *)  buf, buf_size, &r_size);
     print_bin(output, (unsigned char *) buf, r_size);
     output->print("'");
   }
