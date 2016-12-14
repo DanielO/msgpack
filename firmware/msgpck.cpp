@@ -15,6 +15,7 @@
  */
 
 #include <stdint.h>
+#include "application.h"
 #include "msgpck.h"
 
 #define msgpck_empty 0xff

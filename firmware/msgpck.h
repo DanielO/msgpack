@@ -18,6 +18,7 @@
 #define heads_msgpck_h
 
 #include <stdint.h>
+#include "application.h"
 
 // ************************** Look up *****************************/
 
