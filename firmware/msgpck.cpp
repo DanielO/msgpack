@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-#include "Arduino.h"
 #include "msgpck.h"
 
 #define msgpck_empty 0xff
